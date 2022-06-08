@@ -30,7 +30,10 @@ create table if not exists tracks (
 create table if not exists collections (
 	collectionid serial primary key,
 	name varchar(60) not null,
-	year integer not null,
-	albumid integer not null references albums(albumid),
-	trackid integer references tracks(trackid)
+	year integer not null
+);
+create table if not exists collectionstracks (
+	trackid integer references tracks(trackid),
+	collectionid integer references collections(collectionid),
+	constraint collectionpk primary key (trackid, collectionid)
 );
